@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>حاسبة أذون الخزانة المصرية</title>
+<style>
+:root{--gold:#e6c673;--gold2:#a98b4a;--line:#5a4a26;--text:#f3efe6;--muted:#c4bba7;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:#000;color:var(--text);font-family:system-ui,"Segoe UI",Tahoma,Arial,sans-serif;line-height:1.6}
+.app{max-width:480px;margin:14px auto;padding:20px 16px;border:1.5px solid var(--gold2);border-radius:26px;background:linear-gradient(160deg,#1a1a1a,#050505)}
+h1{color:var(--gold);text-align:center;font-size:1.45rem;margin:4px 0 14px;padding-bottom:14px;border-bottom:1px solid var(--gold2)}
+.tabs{display:flex;gap:10px;margin-bottom:12px}
+.tab{flex:1;padding:12px;border-radius:12px;border:1px solid var(--line);background:#111;color:var(--muted);font:inherit;cursor:pointer}
+.tab.on{border-color:var(--gold);color:var(--gold);background:linear-gradient(#2a2410,#0d0d0d)}
+input,select{width:100%;padding:12px 16px;margin-bottom:8px;border-radius:14px;border:1px solid #3a3a3a;background:#0b0b0b;color:var(--text);font:inherit;font-size:1.05rem}
+input::placeholder{color:#8a826f;font-size:.92rem}
+select:invalid{color:#8a826f;font-size:.92rem}
+.hint{font-size:.8rem;color:var(--muted);margin:-2px 4px 10px}
+.btn{width:100%;padding:14px;border-radius:14px;font:inherit;font-weight:700;cursor:pointer}
+.go{border:1px solid var(--gold);background:linear-gradient(#e9cb7a,#a97f2d);color:#1a1405;font-size:1.05rem;margin:4px 0 14px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+.c{border:1px solid #333;border-radius:14px;padding:12px;text-align:center;background:#0b0b0b}
+.c small{display:block;color:var(--muted);font-size:.82rem}
+.c b{color:var(--gold);font-size:1.3rem;font-weight:500;font-variant-numeric:tabular-nums}
+.big{border:1px solid var(--gold2);border-radius:14px;padding:14px;text-align:center;background:#120e04}
+.big small{color:var(--muted)}
+.big b{display:block;font-size:2rem;font-weight:500;font-variant-numeric:tabular-nums}
+.big em{font-style:normal;color:var(--gold);font-size:1.05rem}
+.err{color:#f2a0a0;text-align:center;min-height:2.2em;font-size:.9rem;margin-bottom:6px}
+.acts{display:flex;gap:8px;margin:14px 0}
+.acts .btn{padding:12px 6px;font-size:.92rem;font-weight:500;background:#0b0b0b}
+.new{border:1px solid #b4363a;color:#f4a3a5}
+.sv{border:1px solid var(--gold2);color:var(--gold)}
+.ai{border:1px solid #555;color:var(--text)}
+#aib{display:none;border:1px dashed var(--gold2);border-radius:14px;padding:12px;font-size:.95rem;white-space:pre-wrap;margin-bottom:12px}
+#sv{font-size:.85rem;color:var(--muted);margin-bottom:8px}
+#sv{font-size:.95rem}
+.op{border:1px solid var(--gold2);border-radius:14px;padding:10px 14px;margin-bottom:10px;background:#0b0b0b}
+.op div{display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid #222}
+.op div:last-child{border:0}
+.op b{color:var(--gold);font-weight:500;font-variant-numeric:tabular-nums}
+.note{font-size:.8rem;color:var(--muted);text-align:center;border-top:1px dashed var(--line);padding-top:12px}
+.foot{text-align:center;font-size:.8rem;color:var(--muted);margin-top:8px}
+</style>
+</head>
+<body>
+<div class="app">
+<h1>حاسبة أذون الخزانة المصرية</h1>
+<div id="main">
+<div class="tabs">
+  <button class="tab on" id="tp" type="button">السوق الأولي</button>
+  <button class="tab" id="ts" type="button">السوق الثانوي</button>
+</div>
+
+<div id="pbox">
+  <input id="face" type="text" inputmode="decimal" autocomplete="off" placeholder="القيمة الاسمية" aria-label="القيمة الاسمية">
+  <input id="rate" type="number" inputmode="decimal" step="0.001" min="0" placeholder="العائد % سنوياً" aria-label="العائد">
+  <select id="days" required aria-label="المدة">
+    <option value="" selected disabled>المدة</option>
+    <option value="91">91 يوم</option>
+    <option value="182">182 يوم</option>
+    <option value="273">273 يوم</option>
+    <option value="364">364 يوم</option>
+  </select>
+</div>
+
+
+<button class="btn go" id="go" type="button">حساب العملية</button>
+
+<div id="res">
+  <div class="grid">
+    <div class="c"><small>خصم الشراء</small><b id="r1">—</b></div>
+    <div class="c"><small>قيمة الشراء</small><b id="r2">—</b></div>
+    <div class="c"><small>صافي الربح بعد خصم الضريبة</small><b id="r3">—</b></div>
+    <div class="c"><small>الضريبة (20%)</small><b id="r4">—</b></div>
+  </div>
+  <div class="big"><small>المبلغ المسترد نهاية المدة</small><b id="r5">—</b><em id="r6">نسبة العائد السنوي: —</em></div>
+  <div class="err" id="err"></div>
+</div>
+
+<div class="acts">
+  <button class="btn new" id="nw" type="button">إدخال جديد</button>
+  <button class="btn sv" id="sb" type="button">حفظ العمليتين</button>
+  <button class="btn ai" id="ab" type="button">مساعدك الذكي</button>
+</div>
+
+</div>
+<div id="pg" style="display:none">
+  <h2 id="pgt" style="color:var(--gold);text-align:center;font-size:1.15rem;margin:0 0 12px"></h2>
+  <div id="aib"></div>
+  <div class="tabs" id="svt" style="display:none">
+    <button class="tab on" id="o1" type="button">العملية الأولى</button>
+    <button class="tab" id="o2" type="button">العملية الثانية</button>
+  </div>
+  <div id="sv"></div>
+  <button class="btn go" id="bk" type="button">رجوع للحاسبة</button>
+</div>
+<p class="foot">أ/ طارق متولي</p>
+</div>
+
+<script>
+var TAX = 0.20, mode = "p", last = null;
+function $(i){return document.getElementById(i);}
+function num(i){return parseFloat($(i).value.replace(/,/g, ""));}
+function fmt(n){return n.toLocaleString("en-US",{maximumFractionDigits:2});}
+
+function setMode(m){
+  mode = m;
+  $("tp").classList.toggle("on", m === "p");
+  $("ts").classList.toggle("on", m === "s");
+  fillDays();
+  clearRes();
+}
+function clearRes(){
+  last = null;
+  ["r1","r2","r3","r4","r5"].forEach(function(i){ $(i).textContent = "—"; });
+  $("r6").textContent = "نسبة العائد السنوي: —";
+  $("err").textContent = "";
+  $("aib").style.display = "none";
+}
+function showErr(t){ clearRes(); $("err").textContent = t; }
+function card(label, val){
+  var d = document.createElement("div"); d.className = "c";
+  var s = document.createElement("small"); s.textContent = label;
+  var b = document.createElement("b"); b.textContent = val;
+  d.appendChild(s); d.appendChild(b); return d;
+}
+
+function calc(){
+  var face, y1, d1, y2 = null, d2 = null;
+  face = num("face"); y1 = num("rate")/100; d1 = parseInt($("days").value, 10);
+  if (!(face > 0) || !(y1 >= 0) || !(d1 > 0)) { showErr("أكمل البيانات المطلوبة بأرقام صحيحة."); return; }
+  if (d1 > 364) { showErr("المدة المتبقية لازم تكون من يوم إلى 364 يوم."); return; }
+  var end = face, held = d1, sold = false;
+  if (y2 !== null) {
+    if (!(y2 >= 0) || !(d2 >= 0) || d2 >= d1) { showErr("أيام البيع لازم تكون أقل من أيام الشراء، وأكمل خانتي البيع."); return; }
+    end = face / (1 + y2 * d2 / 365); held = d1 - d2; sold = true;
+  }
+  var price = face / (1 + y1 * d1 / 365);
+  var gross = end - price;
+  var tax = gross > 0 ? gross * TAX : 0;
+  var net = gross - tax;
+  var refund = end - tax;
+  var eff = net / price * 365 / held * 100;
+  last = {market: mode === "p" ? "أولي" : "ثانوي", face: face, buyYield: y1*100, buyDays: d1, sellYield: sold ? y2*100 : null, sellDays: sold ? d2 : null, held: held, price: price, discount: face - price, gross: gross, tax: tax, net: net, refund: refund, eff: eff};
+
+  $("err").textContent = "";
+  $("r1").textContent = fmt(face - price); $("r2").textContent = fmt(price); $("r3").textContent = fmt(net); $("r4").textContent = fmt(tax);
+  $("r5").textContent = fmt(refund); $("r6").textContent = "نسبة العائد السنوي: " + fmt(eff) + "%";
+  $("aib").style.display = "none";
+}
+
+function resetAll(){
+  ["face","rate"].forEach(function(i){$(i).value = "";});
+  $("days").value = "";
+  clearRes();
+}
+
+var cur = 0;
+function loadSaved(){ try { return JSON.parse(localStorage.getItem("tbill_ops") || "[]"); } catch(e) { return []; } }
+function showPage(t){ $("main").style.display = "none"; $("pg").style.display = "block"; $("pgt").textContent = t; window.scrollTo(0, 0); }
+function back(){ $("pg").style.display = "none"; $("main").style.display = "block"; }
+function renderSaved(){
+  var box = $("sv"); box.textContent = "";
+  var l = loadSaved().slice(cur, cur + 1);
+  $("o1").classList.toggle("on", cur === 0); $("o2").classList.toggle("on", cur === 1);
+  if (!l.length) { box.textContent = cur === 0 ? "مفيش عملية أولى محفوظة لسه. احسب عملية واضغط حفظ العمليتين." : "مفيش عملية تانية محفوظة لسه."; return; }
+  l.forEach(function(x){
+    var d = document.createElement("div"); d.className = "op";
+    [["السوق", "ال" + x.market], ["القيمة الاسمية", fmt(x.face)], ["مدة الاحتفاظ", x.held + " يوم"], ["قيمة الشراء", fmt(x.price)], ["الضريبة (20%)", fmt(x.tax)], ["صافي الربح", fmt(x.net)], ["المبلغ المسترد", fmt(x.refund)], ["العائد السنوي", fmt(x.eff) + "%"]].forEach(function(r){
+      var row = document.createElement("div"), a = document.createElement("span"), b = document.createElement("b");
+      a.textContent = r[0]; b.textContent = r[1]; row.appendChild(a); row.appendChild(b); d.appendChild(row);
+    });
+    box.appendChild(d);
+  });
+}
+function save(){
+  if (last && !last.saved) {
+    last.saved = true;
+    var l = loadSaved(); l.push(last); l = l.slice(-2); cur = l.length - 1;
+    try { localStorage.setItem("tbill_ops", JSON.stringify(l)); } catch(e) {}
+  }
+  renderSaved();
+  showPage("آخر عمليتين محفوظتين");
+  $("aib").style.display = "none"; $("sv").style.display = "block"; $("svt").style.display = "flex";
+}
+
+function ask(){
+  showPage("شرح العملية"); $("sv").style.display = "none"; $("svt").style.display = "none";
+  var box = $("aib"); box.style.display = "block";
+  if (!last) { box.textContent = "احسب العملية الأول، وبعدين اضغط هنا وأنا أشرحها لك خطوة خطوة."; return; }
+  var L = last, f = fmt;
+  box.textContent = [
+    "العملية: شراء إذن خزانة في السوق ال" + L.market + " بقيمة اسمية " + f(L.face) + " جنيه، مدة " + L.buyDays + " يوم، بعائد " + f(L.buyYield) + "% سنوياً.",
+    "1) سعر الشراء: القيمة الاسمية ÷ (1 + العائد × الأيام ÷ 365) = " + f(L.price) + " جنيه. ده المبلغ اللي بتدفعه فعلاً.",
+    "2) خصم الشراء: الفرق بين القيمة الاسمية وسعر الشراء = " + f(L.discount) + " جنيه، وده ربحك قبل الضريبة.",
+    "3) الضريبة: 20% من الربح = " + f(L.tax) + " جنيه.",
+    "4) صافي الربح بعد خصم الضريبة: " + f(L.gross) + " − " + f(L.tax) + " = " + f(L.net) + " جنيه.",
+    "5) المبلغ المسترد نهاية المدة: القيمة الاسمية − الضريبة = " + f(L.face) + " − " + f(L.tax) + " = " + f(L.refund) + " جنيه.",
+    "6) العائد السنوي الفعلي بعد الضريبة: صافي الربح ÷ سعر الشراء × 365 ÷ " + L.held + " = " + f(L.eff) + "%.",
+    "الأرقام تقديرية على أساس 365 يوم في السنة."
+  ].join("\n\n");
+}
+
+$("tp").addEventListener("click", function(){ setMode("p"); });
+$("ts").addEventListener("click", function(){ setMode("s"); });
+$("go").addEventListener("click", calc);
+$("nw").addEventListener("click", resetAll);
+$("sb").addEventListener("click", save);
+$("ab").addEventListener("click", ask);
+$("bk").addEventListener("click", back);
+$("o1").addEventListener("click", function(){ cur = 0; renderSaved(); });
+$("o2").addEventListener("click", function(){ cur = 1; renderSaved(); });
+$("face").addEventListener("input", function(){
+  var v = this.value.replace(/[٠-٩]/g, function(d){ return d.charCodeAt(0) - 1632; }).replace(/[^\d.]/g, "");
+  var p = v.split(".");
+  p[0] = p[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  this.value = p.length > 1 ? p[0] + "." + p[1].slice(0, 2) : p[0];
+});
+function fillDays(){
+  var s = $("days"), i, list = [];
+  if (mode === "p") list = [91, 182, 273, 364]; else for (i = 1; i <= 364; i++) list.push(i);
+  s.length = 1;
+  s.options[0].textContent = "المدة";
+  list.forEach(function(d){ s.add(new Option(d + " يوم", d)); });
+  s.value = "";
+}
+fillDays();
+renderSaved();
+</script>
+</body>
+</html>
