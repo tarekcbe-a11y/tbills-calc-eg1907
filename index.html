@@ -8,41 +8,38 @@
 :root{--gold:#e6c673;--gold2:#a98b4a;--line:#5a4a26;--text:#f3efe6;--muted:#c4bba7;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
 *{box-sizing:border-box}
-body{margin:0;background:#000;color:var(--text);font-family:system-ui,"Segoe UI",Tahoma,Arial,sans-serif;line-height:1.6}
-.app{max-width:480px;margin:14px auto;padding:20px 16px;border:1.5px solid var(--gold2);border-radius:26px;background:linear-gradient(160deg,#1a1a1a,#050505)}
-h1{color:var(--gold);text-align:center;font-size:1.45rem;margin:4px 0 14px;padding-bottom:14px;border-bottom:1px solid var(--gold2)}
-.tabs{display:flex;gap:10px;margin-bottom:12px}
-.tab{flex:1;padding:12px;border-radius:12px;border:1px solid var(--line);background:#111;color:var(--muted);font:inherit;cursor:pointer}
+body{margin:0;background:#000;color:var(--text);font-family:system-ui,"Segoe UI",Tahoma,Arial,sans-serif;line-height:1.45}
+.app{max-width:480px;margin:10px auto;padding:14px 14px;border:1.5px solid var(--gold2);border-radius:24px;background:linear-gradient(160deg,#1a1a1a,#050505)}
+h1{color:var(--gold);text-align:center;font-size:1.38rem;margin:2px 0 10px;padding-bottom:10px;border-bottom:1px solid var(--gold2)}
+.tabs{display:flex;gap:8px;margin-bottom:9px}
+.tab{flex:1;padding:9px 10px;border-radius:12px;border:1px solid var(--line);background:#111;color:var(--muted);font:inherit;font-size:.95rem;cursor:pointer}
 .tab.on{border-color:var(--gold);color:var(--gold);background:linear-gradient(#2a2410,#0d0d0d)}
-input,select{width:100%;padding:12px 16px;margin-bottom:8px;border-radius:14px;border:1px solid #3a3a3a;background:#0b0b0b;color:var(--text);font:inherit;font-size:1.05rem}
-input::placeholder{color:#8a826f;font-size:.92rem}
-select:invalid{color:#8a826f;font-size:.92rem}
-.hint{font-size:.8rem;color:var(--muted);margin:-2px 4px 10px}
-.btn{width:100%;padding:14px;border-radius:14px;font:inherit;font-weight:700;cursor:pointer}
-.go{border:1px solid var(--gold);background:linear-gradient(#e9cb7a,#a97f2d);color:#1a1405;font-size:1.05rem;margin:4px 0 14px}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
-.c{border:1px solid #333;border-radius:14px;padding:12px;text-align:center;background:#0b0b0b}
-.c small{display:block;color:var(--muted);font-size:.82rem}
-.c b{color:var(--gold);font-size:1.3rem;font-weight:500;font-variant-numeric:tabular-nums}
-.big{border:1px solid var(--gold2);border-radius:14px;padding:14px;text-align:center;background:#120e04}
-.big small{color:var(--muted)}
-.big b{display:block;font-size:2rem;font-weight:500;font-variant-numeric:tabular-nums}
-.big em{font-style:normal;color:var(--gold);font-size:1.05rem}
-.err{color:#f2a0a0;text-align:center;min-height:2.2em;font-size:.9rem;margin-bottom:6px}
-.acts{display:flex;gap:8px;margin:14px 0}
-.acts .btn{padding:12px 6px;font-size:.92rem;font-weight:500;background:#0b0b0b}
+input,select{width:100%;padding:10px 14px;margin-bottom:7px;border-radius:13px;border:1px solid #3a3a3a;background:#0b0b0b;color:var(--text);font:inherit;font-size:1rem}
+input::placeholder{color:#8a826f;font-size:.9rem}
+select:invalid{color:#8a826f;font-size:.9rem}
+.btn{width:100%;padding:11px;border-radius:13px;font:inherit;font-weight:700;cursor:pointer}
+.go{border:1px solid var(--gold);background:linear-gradient(#e9cb7a,#a97f2d);color:#1a1405;font-size:1rem;margin:2px 0 10px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px}
+.c{border:1px solid #333;border-radius:13px;padding:9px 10px;text-align:center;background:#0b0b0b}
+.c small{display:block;color:var(--muted);font-size:.78rem;margin-bottom:2px}
+.c b{color:var(--gold);font-size:1.2rem;font-weight:500;font-variant-numeric:tabular-nums}
+.big{border:1px solid var(--gold2);border-radius:13px;padding:10px 12px;text-align:center;background:#120e04}
+.big small{color:var(--muted);font-size:.82rem}
+.big b{display:block;font-size:1.75rem;line-height:1.25;font-weight:500;font-variant-numeric:tabular-nums;margin:2px 0}
+.big em{font-style:normal;color:var(--gold);font-size:.98rem}
+.err{color:#f2a0a0;text-align:center;min-height:1.4em;font-size:.86rem;margin:4px 0 2px}
+.acts{display:flex;gap:7px;margin:8px 0 6px}
+.acts .btn{padding:9px 6px;font-size:.88rem;font-weight:500;background:#0b0b0b}
 .new{border:1px solid #b4363a;color:#f4a3a5}
 .sv{border:1px solid var(--gold2);color:var(--gold)}
 .ai{border:1px solid #555;color:var(--text)}
-#aib{display:none;border:1px dashed var(--gold2);border-radius:14px;padding:12px;font-size:.95rem;white-space:pre-wrap;margin-bottom:12px}
-#sv{font-size:.85rem;color:var(--muted);margin-bottom:8px}
-#sv{font-size:.95rem}
-.op{border:1px solid var(--gold2);border-radius:14px;padding:10px 14px;margin-bottom:10px;background:#0b0b0b}
-.op div{display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid #222}
+#aib{display:none;border:1px dashed var(--gold2);border-radius:13px;padding:10px 12px;font-size:.9rem;white-space:pre-wrap;margin-bottom:9px}
+#sv{font-size:.9rem;color:var(--muted);margin-bottom:8px}
+.op{border:1px solid var(--gold2);border-radius:13px;padding:8px 12px;margin-bottom:8px;background:#0b0b0b}
+.op div{display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid #222;font-size:.9rem}
 .op div:last-child{border:0}
 .op b{color:var(--gold);font-weight:500;font-variant-numeric:tabular-nums}
-.note{font-size:.8rem;color:var(--muted);text-align:center;border-top:1px dashed var(--line);padding-top:12px}
-.foot{text-align:center;font-size:.8rem;color:var(--muted);margin-top:8px}
+.foot{text-align:center;font-size:.78rem;color:var(--muted);margin:6px 0 0}
 </style>
 </head>
 <body>
@@ -66,15 +63,14 @@ select:invalid{color:#8a826f;font-size:.92rem}
   </select>
 </div>
 
-
 <button class="btn go" id="go" type="button">حساب العملية</button>
 
 <div id="res">
   <div class="grid">
     <div class="c"><small>خصم الشراء</small><b id="r1">—</b></div>
     <div class="c"><small>قيمة الشراء</small><b id="r2">—</b></div>
-    <div class="c"><small>صافي الربح بعد خصم الضريبة</small><b id="r3">—</b></div>
-    <div class="c"><small>الضريبة (20%)</small><b id="r4">—</b></div>
+    <div class="c"><small>الضريبة (20%)</small><b id="r3">—</b></div>
+    <div class="c"><small>صافي الربح بعد خصم الضريبة</small><b id="r4">—</b></div>
   </div>
   <div class="big"><small>المبلغ المسترد نهاية المدة</small><b id="r5">—</b><em id="r6">نسبة العائد السنوي: —</em></div>
   <div class="err" id="err"></div>
@@ -85,10 +81,10 @@ select:invalid{color:#8a826f;font-size:.92rem}
   <button class="btn sv" id="sb" type="button">حفظ العمليتين</button>
   <button class="btn ai" id="ab" type="button">مساعدك الذكي</button>
 </div>
-
 </div>
+
 <div id="pg" style="display:none">
-  <h2 id="pgt" style="color:var(--gold);text-align:center;font-size:1.15rem;margin:0 0 12px"></h2>
+  <h2 id="pgt" style="color:var(--gold);text-align:center;font-size:1.1rem;margin:0 0 9px"></h2>
   <div id="aib"></div>
   <div class="tabs" id="svt" style="display:none">
     <button class="tab on" id="o1" type="button">العملية الأولى</button>
@@ -121,34 +117,43 @@ function clearRes(){
   $("aib").style.display = "none";
 }
 function showErr(t){ clearRes(); $("err").textContent = t; }
-function card(label, val){
-  var d = document.createElement("div"); d.className = "c";
-  var s = document.createElement("small"); s.textContent = label;
-  var b = document.createElement("b"); b.textContent = val;
-  d.appendChild(s); d.appendChild(b); return d;
-}
 
 function calc(){
-  var face, y1, d1, y2 = null, d2 = null;
-  face = num("face"); y1 = num("rate")/100; d1 = parseInt($("days").value, 10);
+  var face = num("face");
+  var y1 = num("rate") / 100;
+  var d1 = parseInt($("days").value, 10);
   if (!(face > 0) || !(y1 >= 0) || !(d1 > 0)) { showErr("أكمل البيانات المطلوبة بأرقام صحيحة."); return; }
   if (d1 > 364) { showErr("المدة المتبقية لازم تكون من يوم إلى 364 يوم."); return; }
-  var end = face, held = d1, sold = false;
-  if (y2 !== null) {
-    if (!(y2 >= 0) || !(d2 >= 0) || d2 >= d1) { showErr("أيام البيع لازم تكون أقل من أيام الشراء، وأكمل خانتي البيع."); return; }
-    end = face / (1 + y2 * d2 / 365); held = d1 - d2; sold = true;
-  }
+
   var price = face / (1 + y1 * d1 / 365);
-  var gross = end - price;
+  var gross = face - price;
   var tax = gross > 0 ? gross * TAX : 0;
   var net = gross - tax;
-  var refund = end - tax;
-  var eff = net / price * 365 / held * 100;
-  last = {market: mode === "p" ? "أولي" : "ثانوي", face: face, buyYield: y1*100, buyDays: d1, sellYield: sold ? y2*100 : null, sellDays: sold ? d2 : null, held: held, price: price, discount: face - price, gross: gross, tax: tax, net: net, refund: refund, eff: eff};
+  var refund = face - tax;
+  var eff = net / price * 365 / d1 * 100;
+
+  last = {
+    market: mode === "p" ? "أولي" : "ثانوي",
+    face: face,
+    buyYield: y1 * 100,
+    buyDays: d1,
+    held: d1,
+    price: price,
+    discount: gross,
+    gross: gross,
+    tax: tax,
+    net: net,
+    refund: refund,
+    eff: eff
+  };
 
   $("err").textContent = "";
-  $("r1").textContent = fmt(face - price); $("r2").textContent = fmt(price); $("r3").textContent = fmt(net); $("r4").textContent = fmt(tax);
-  $("r5").textContent = fmt(refund); $("r6").textContent = "نسبة العائد السنوي: " + fmt(eff) + "%";
+  $("r1").textContent = fmt(gross);
+  $("r2").textContent = fmt(price);
+  $("r3").textContent = fmt(tax);
+  $("r4").textContent = fmt(net);
+  $("r5").textContent = fmt(refund);
+  $("r6").textContent = "نسبة العائد السنوي: " + fmt(eff) + "%";
   $("aib").style.display = "none";
 }
 
@@ -194,9 +199,9 @@ function ask(){
   var L = last, f = fmt;
   box.textContent = [
     "العملية: شراء إذن خزانة في السوق ال" + L.market + " بقيمة اسمية " + f(L.face) + " جنيه، مدة " + L.buyDays + " يوم، بعائد " + f(L.buyYield) + "% سنوياً.",
-    "1) سعر الشراء: القيمة الاسمية ÷ (1 + العائد × الأيام ÷ 365) = " + f(L.price) + " جنيه. ده المبلغ اللي بتدفعه فعلاً.",
-    "2) خصم الشراء: الفرق بين القيمة الاسمية وسعر الشراء = " + f(L.discount) + " جنيه، وده ربحك قبل الضريبة.",
-    "3) الضريبة: 20% من الربح = " + f(L.tax) + " جنيه.",
+    "1) سعر الشراء: القيمة الاسمية ÷ (1 + العائد × الأيام ÷ 365) = " + f(L.price) + " جنيه.",
+    "2) خصم الشراء (الربح قبل الضريبة): القيمة الاسمية − سعر الشراء = " + f(L.discount) + " جنيه.",
+    "3) الضريبة: 20% من خصم الشراء = " + f(L.tax) + " جنيه.",
     "4) صافي الربح بعد خصم الضريبة: " + f(L.gross) + " − " + f(L.tax) + " = " + f(L.net) + " جنيه.",
     "5) المبلغ المسترد نهاية المدة: القيمة الاسمية − الضريبة = " + f(L.face) + " − " + f(L.tax) + " = " + f(L.refund) + " جنيه.",
     "6) العائد السنوي الفعلي بعد الضريبة: صافي الربح ÷ سعر الشراء × 365 ÷ " + L.held + " = " + f(L.eff) + "%.",
